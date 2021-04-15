@@ -33,6 +33,10 @@ const ArticlePreview = props => {
     }
   };
 
+  if (articleIsBad(article.tagList)) {
+    return <div />
+  }
+
   return (
     <div className="article-preview">
       <div className="article-meta">
@@ -74,6 +78,17 @@ const ArticlePreview = props => {
       </Link>
     </div>
   );
+}
+
+const articleIsBad = (tagList) => {
+  const culprits = ['HITLER', 'SIDA', 'mahdi', 'butt', 'xxx', 'xxxx']
+  let isBad = false
+  culprits.map(culprit => {
+    if (tagList && tagList.includes(culprit)) {
+      isBad = true
+    }
+  })
+  return isBad
 }
 
 export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
