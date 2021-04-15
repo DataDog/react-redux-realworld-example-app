@@ -16,7 +16,7 @@ const Tags = props => {
     return (
       <div className="tag-list">
         {
-          tags.map(tag => {
+          filteredTags.map(tag => {
             const handleClick = ev => {
               ev.preventDefault();
               props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
