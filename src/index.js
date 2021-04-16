@@ -11,8 +11,10 @@ import { datadogRum } from '@datadog/browser-rum';
 import App from './components/App';
 
 datadogRum.init({
-    applicationId: process.env.REACT_APP_ID,
-    clientToken: process.env.REACT_APP_CLIENT_TOKEN,
+    // applicationId: process.env.REACT_APP_ID,
+    // clientToken: process.env.REACT_APP_CLIENT_TOKEN,
+    applicationId: '143727b3-8d29-44f5-b4bc-6c9510a921ca',
+    clientToken: 'pube5b4c3745f12edc924be9f9c7be6cd39',
     site: 'datadoghq.com',
     service: 'Conduit',
     sampleRate: 100,
