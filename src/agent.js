@@ -37,8 +37,25 @@ const Auth = {
     requests.put('/user', { user })
 };
 
+// Cache most popular tags, don't quite have access to their prod so I'm faking atm by 'periodically polling / caching'.
 const Tags = {
-  getAll: () => requests.get('/tags')
+  getAll: () => requests.get('/tags'),
+  getCachedTags: () => [
+    'javascript',
+    'Node.js',
+    'technology',
+    'WebDevelopement',
+    'history',
+    'art',
+    'writing',
+    'test',
+    'HuManIty',
+    'HuManIty',
+    'Gandhi',
+    'BlackLivesMatter',
+    'BlackLivesMatter',
+    'dragons'
+  ]
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;

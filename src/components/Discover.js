@@ -3,11 +3,10 @@ import agent from '../agent';
 import ArticleList from './ArticleList';
 import { CHANGE_TAB } from '../constants/actionTypes';
 
+
 const Discover = props => {
   const topics = agent.Topics.allTopics();
-  const tags = agent.Tags.getAll();
   const articles = false
-  console.log(tags, topics);
 
   const clickHandler = ev => {
     ev.preventDefault();
@@ -33,7 +32,7 @@ const Discover = props => {
               <a onClick={clickHandler} key={i} href="">
               <div style={{display: 'flex', flexDirection: 'column', marginBottom: '40px'}}>
                 <div style={{marginBottom: '5px', marginLeft: '10px', fontSize: "1em"}}>{topic.title}</div>
-                <img height="150px" width="150px" style={{border: '2px solid #f3f3f3', borderRadius: '30px'}} src={topic.image} />
+                <img loading="lazy" height="150px" width="150px" style={{border: '2px solid #f3f3f3', borderRadius: '30px'}} src={topic.image} />
               </div>
             </a>
             );

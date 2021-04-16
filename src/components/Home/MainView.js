@@ -4,6 +4,9 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+import * as articles from '../cached/articles.json';
+
+const allArticles = articles.articles
 
 const YourFeedTab = props => {
   if (props.token) {
@@ -28,7 +31,7 @@ const YourFeedTab = props => {
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    props.onTabClick('all', agent.Articles.all, allArticles);
   };
   return (
     <li className="nav-item">
@@ -36,7 +39,7 @@ const GlobalFeedTab = props => {
         href=""
         className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
         onClick={clickHandler}>
-        Global Feed
+        Your Feed
       </a>
     </li>
   );
@@ -83,9 +86,9 @@ const Tabulate = props => {
   } else {
     tab = <ArticleList
         pager={props.pager}
-        articles={props.articles}
+        articles={allArticles}
         loading={props.loading}
-        articlesCount={props.articlesCount}
+        articlesCount={articles.articlesCount}
     currentPage={props.currentPage} />
   }
 
@@ -102,16 +105,16 @@ const mapDispatchToProps = dispatch => ({
   onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
 });
 
+// <YourFeedTab
+//   token={props.token}
+//   tab={props.tab}
+//   onTabClick={props.onTabClick} />
+
 const MainView = props => {
   return (
     <div className="col-md-9">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-
-          <YourFeedTab
-            token={props.token}
-            tab={props.tab}
-            onTabClick={props.onTabClick} />
 
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
@@ -124,9 +127,9 @@ const MainView = props => {
 
       <Tabulate tab={props.tab}
         pager={props.pager}
-        articles={props.articles}
+        articles={allArticles}
         loading={props.loading}
-        articlesCount={props.articlesCount}
+        articlesCount={articles.articlesCount}
         onTabClick={props.onTabClick}
     currentPage={props.currentPage} />
     </div>

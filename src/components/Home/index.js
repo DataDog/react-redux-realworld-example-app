@@ -4,6 +4,8 @@ import React from 'react';
 import Tags from './Tags';
 import agent from '../../agent';
 import { connect } from 'react-redux';
+import * as articles from '../cached/articles.json'
+import * as tags from '../cached/tags.json'
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
@@ -30,11 +32,13 @@ const mapDispatchToProps = dispatch => ({
 class Home extends React.Component {
   componentWillMount() {
     const tab = this.props.token ? 'feed' : 'all';
-    const articlesPromise = this.props.token ?
-      agent.Articles.feed :
-      agent.Articles.all;
+    // pre-cached version fetching:
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    // const articlesPromise = this.props.token ?
+    //   agent.Articles.feed :
+    //   agent.Articles.all;
+
+    // this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
   }
 
   componentWillUnmount() {
@@ -57,7 +61,7 @@ class Home extends React.Component {
                 <p>Popular Tags</p>
 
                 <Tags
-                  tags={this.props.tags}
+                  tags={tags}
                   onClickTag={this.props.onClickTag} />
 
               </div>
