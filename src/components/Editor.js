@@ -2,6 +2,7 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import { datadogRum } from '@datadog/browser-rum'
 import {
   ADD_TAG,
   EDITOR_PAGE_LOADED,
@@ -66,6 +67,10 @@ class Editor extends React.Component {
         agent.Articles.update(Object.assign(article, slug)) :
         agent.Articles.create(article);
 
+      datadogRum.addAction('new post', {
+        'article': article
+      });
+      
       this.props.onSubmit(promise);
     };
   }

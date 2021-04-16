@@ -3,6 +3,7 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import { datadogRum } from '@datadog/browser-rum'
 import {
   UPDATE_FIELD_AUTH,
   LOGIN,
@@ -29,8 +30,16 @@ class Login extends React.Component {
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      this.observe(email)
+      this.props.onSubmit(email, password)
     };
+    this.observe = userEmail => {
+      if (userEmail) {
+        datadogRum.addAction('login', {
+            'userLogin': userEmail
+        })
+      };
+    }
   }
 
   componentWillUnmount() {

@@ -3,6 +3,7 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import { datadogRum } from '@datadog/browser-rum'
 import {
   UPDATE_FIELD_AUTH,
   REGISTER,
@@ -34,7 +35,16 @@ class Register extends React.Component {
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
     this.submitForm = (username, email, password) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(username, email, password);
+      this.observe(username, email)
+      const userInfo = this.props.onSubmit(username, email, password);
+    }
+    this.observe = (username, email) => {
+      if (username) {
+        datadogRum.addAction('signup', {
+          'userName': username,
+          'email': email
+        })
+      };
     }
   }
 
