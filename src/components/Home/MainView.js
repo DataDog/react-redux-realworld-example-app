@@ -1,4 +1,5 @@
 import ArticleList from '../ArticleList';
+import Discover from '../Discover';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -41,6 +42,23 @@ const GlobalFeedTab = props => {
   );
 };
 
+const DiscoverTab = props => {
+  const clickHandler = ev => {
+    ev.preventDefault();
+    props.onTabClick('allTopics', agent.Topics.allTopics, agent.Topics.allTopics());
+  };
+  return (
+    <li className="nav-item">
+      <a
+        href=""
+        className={ props.tab === 'allTopics' ? 'nav-link active' : 'nav-link' }
+        onClick={clickHandler}>
+        Discover
+      </a>
+    </li>
+  );
+};
+
 const TagFilterTab = props => {
   if (!props.tag) {
     return null;
@@ -54,6 +72,25 @@ const TagFilterTab = props => {
     </li>
   );
 };
+
+const Tabulate = props => {
+  let tab;
+
+  if (!props.tab) {
+    return null;
+  } else if (props.tab === 'allTopics') {
+    tab = <Discover onTabClick={props.onTabClick} />
+  } else {
+    tab = <ArticleList
+        pager={props.pager}
+        articles={props.articles}
+        loading={props.loading}
+        articlesCount={props.articlesCount}
+    currentPage={props.currentPage} />
+  }
+
+  return tab;
+}
 
 const mapStateToProps = state => ({
   ...state.articleList,
@@ -78,17 +115,20 @@ const MainView = props => {
 
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
+          <DiscoverTab tab={props.tab} onTabClick={props.onTabClick} />
+
           <TagFilterTab tag={props.tag} />
 
         </ul>
       </div>
 
-      <ArticleList
+      <Tabulate tab={props.tab}
         pager={props.pager}
         articles={props.articles}
         loading={props.loading}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+        onTabClick={props.onTabClick}
+    currentPage={props.currentPage} />
     </div>
   );
 };

@@ -68,6 +68,23 @@ const Articles = {
     requests.post('/articles', { article })
 };
 
+const Topics = {
+  allTopics: () => {
+    return [
+      {title: 'Art', image: 'https://images.fineartamerica.com/images-medium-large-5/abstract-art-color-splash-on-square-ann-powell.jpg'},
+      {title: 'Books', image: 'https://lagosbooksclub.files.wordpress.com/2012/07/library00.jpg'},
+      {title: 'Film', image: 'https://i.pinimg.com/originals/d1/12/2f/d1122f70c7bd0fee6ad4ff546d62e11d.jpg'},
+      {title: 'Technology', image: 'https://arisant.com/wp-content/uploads/2019/02/leverage-the-power-of-cloud-arisant-500x500.jpg'},
+      {title: 'Music', image: 'https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/YT_Music.jpg'},
+      {title: 'Gaming', image: 'https://cdn.vox-cdn.com/thumbor/mzLxakOdU-zxagxZHNgUiEkpe6M=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19173830/acastro_190904_3643_gaming_gear_package_centered.jpg'},
+      {title: 'Humor', image: 'https://cdn.vox-cdn.com/thumbor/VMdinEMpwbiR_Bk2xcL8dZFhgFg=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22169304/robdobi_ringer_trumpcomedy.jpg'},
+      {title: 'Photography', image: 'https://creativereview.imgix.net/content/uploads/2016/07/HomeCards_800x800_Subjects_Photography-021.jpg'},
+      {title: 'Politics', image: 'https://mk0appinventiv4394ey.kinstacdn.com/wp-content/uploads/sites/1/2020/11/blockchain-in-politics.png'}
+    ]
+  }
+  // allTags: () => requests.get('/tags')
+}
+
 const Comments = {
   create: (slug, comment) =>
     requests.post(`/articles/${slug}/comments`, { comment }),
@@ -92,5 +109,6 @@ export default {
   Comments,
   Profile,
   Tags,
+  Topics,
   setToken: _token => { token = _token; }
 };
