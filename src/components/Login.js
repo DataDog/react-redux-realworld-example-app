@@ -36,7 +36,7 @@ class Login extends React.Component {
     this.observe = userEmail => {
       if (userEmail) {
         datadogRum.addAction('login', {
-            'userLogin': userEmail
+            'userEmail': userEmail
         })
       };
     }

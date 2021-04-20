@@ -67,8 +67,9 @@ class Editor extends React.Component {
         agent.Articles.update(Object.assign(article, slug)) :
         agent.Articles.create(article);
 
-      datadogRum.addAction('new post', {
-        'article': article
+      datadogRum.addAction('newpost', {
+        'article': article,
+        'slug': slug
       });
       
       this.props.onSubmit(promise);

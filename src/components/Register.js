@@ -41,7 +41,7 @@ class Register extends React.Component {
     this.observe = (username, email) => {
       if (username) {
         datadogRum.addAction('signup', {
-          'userName': username,
+          'newUser': username,
           'email': email
         })
       };
