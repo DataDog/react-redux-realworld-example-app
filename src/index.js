@@ -6,8 +6,6 @@ import { store, history} from './store';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
-import { datadogRum } from '@datadog/browser-rum';
-
 import App from './components/App';
 
 ReactDOM.render((
