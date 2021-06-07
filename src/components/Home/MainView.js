@@ -3,6 +3,9 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+import * as articles from '../cache/articles.json';
+
+const allArticles = articles.articles
 
 const YourFeedTab = props => {
   if (props.token) {
@@ -27,7 +30,8 @@ const YourFeedTab = props => {
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    // props.onTabClick('all', agent.Articles.all, agent.Articles.all());
+    props.onTabClick('all', agent.Articles.all, allArticles);
   };
   return (
     <li className="nav-item">
@@ -83,12 +87,20 @@ const MainView = props => {
         </ul>
       </div>
 
-      <ArticleList
+      { props.tab === 'feed'
+        ? <ArticleList
         pager={props.pager}
         articles={props.articles}
         loading={props.loading}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage} />
+        : <ArticleList
+        pager={props.pager}
+        articles={allArticles}
+        loading={props.loading}
+        articlesCount={articles.articlesCount}
+        currentPage={props.currentPage} />
+       }
     </div>
   );
 };

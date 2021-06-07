@@ -10,6 +10,8 @@ import {
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
 
+import * as tags from '../cache/tags.json'
+
 const Promise = global.Promise;
 
 const mapStateToProps = state => ({
@@ -34,7 +36,7 @@ class Home extends React.Component {
       agent.Articles.feed :
       agent.Articles.all;
 
-    this.props.onLoad(tab, articlesPromise, Promise.all([agent.Tags.getAll(), articlesPromise()]));
+    this.props.onLoad(tab, articlesPromise, Promise.all([tags, articlesPromise()]));
   }
 
   componentWillUnmount() {
@@ -57,7 +59,7 @@ class Home extends React.Component {
                 <p>Popular Tags</p>
 
                 <Tags
-                  tags={this.props.tags}
+                  tags={tags}
                   onClickTag={this.props.onClickTag} />
 
               </div>

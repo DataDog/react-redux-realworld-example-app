@@ -2,21 +2,23 @@ import React from 'react';
 import agent from '../../agent';
 
 const Tags = props => {
-  const tags = props.tags;
-  let filteredTags;
+  // const tags = props.tags;
+  // let filteredTags;
+
+  const tags = props.tags.tags;
 
   // Only show appropriate tags
   if (tags) {
-    filteredTags = tags.filter(tag => {
-      if (tag && tagIsGood(tag)) {
-        return tag
-      }
-    });
+    // filteredTags = tags.filter(tag => {
+    //   if (tag && tagIsGood(tag)) {
+    //     return tag
+    //   }
+    // });
 
     return (
       <div className="tag-list">
         {
-          filteredTags.map(tag => {
+          tags.map(tag => {
             const handleClick = ev => {
               ev.preventDefault();
               props.onClickTag(tag, page => agent.Articles.byTag(tag, page), agent.Articles.byTag(tag));
@@ -42,9 +44,9 @@ const Tags = props => {
   }
 };
 
-const tagIsGood = (tag) => {
-  const culprits = ['HITLER', 'SIDA', 'mahdi', 'butt', 'xxx', 'xxxx'];
-  return !culprits.includes(tag);
-};
+// const tagIsGood = (tag) => {
+//   const culprits = ['HITLER', 'SIDA', 'mahdi', 'butt', 'xxx', 'xxxx'];
+//   return !culprits.includes(tag);
+// };
 
 export default Tags;
