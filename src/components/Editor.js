@@ -10,6 +10,7 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
+import { datadogRum } from '@datadog/browser-rum';
 
 const mapStateToProps = state => ({
   ...state.editor
@@ -67,6 +68,11 @@ class Editor extends React.Component {
         agent.Articles.create(article);
 
       this.props.onSubmit(promise);
+
+      datadogRum.addAction('newpost', {
+        'article': article,
+        'slug': slug
+      });
     };
   }
 

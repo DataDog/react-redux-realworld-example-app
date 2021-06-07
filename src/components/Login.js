@@ -8,6 +8,7 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import { datadogRum } from '@datadog/browser-rum';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -30,6 +31,10 @@ class Login extends React.Component {
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
       this.props.onSubmit(email, password);
+      datadogRum.addAction('login', {
+          'userLogin': email,
+          'userEmail': email
+      })
     };
   }
 
